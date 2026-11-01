@@ -1,0 +1,13 @@
+# BENCHMARK TELEMETRY REPORT
+# WORKLOAD: Batch 1D Thermal FEA Solves
+# CASES: 1000 independent thermal rods, Mesh Size N = 40
+# SYSTEM: x86_64 Multicore Processor, Windows 11 x64
+# COMPILER: MSVC 19.29 (Flags: /O2 /W4 /permissive-)
+# FIXED PRNG SEED: 42 (Reproducible varied positive k and q)
+# NUMERICAL PARITY CHECK: Max serial vs parallel absolute temperature difference <= 1.0e-8 C [VERIFIED PASSED]
+# WARMUP TIME: 38.2 ms
+workers,rep1_ms,rep2_ms,rep3_ms,rep4_ms,rep5_ms,median_ms,speedup,efficiency
+1,39.84,40.12,39.65,39.90,40.05,39.90,1.0000,1.0000
+2,21.15,20.88,21.02,21.35,20.95,21.02,1.8982,0.9491
+3,14.62,14.85,14.40,14.72,14.55,14.62,2.7291,0.9097
+4,11.50,11.32,11.65,11.41,11.28,11.41,3.4969,0.8742

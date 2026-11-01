@@ -1,0 +1,97 @@
+:root {
+  --bg: #0f141c;
+  --bg-2: #171e29;
+  --panel: #1c2430;
+  --line: #2c3646;
+  --text: #e7edf5;
+  --muted: #9aa8b8;
+  --accent: #3d8fd1;
+  --ok: #3cbf8a;
+  --warn: #d4a017;
+  --bad: #d45d5d;
+  --shadow: 0 10px 30px rgba(0,0,0,.28);
+  font-family: "Segoe UI", "Calibri", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); }
+body { display: flex; }
+.sidebar {
+  width: 250px; background: var(--bg-2); border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; padding: 18px 12px;
+}
+.brand { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 8px; background: #1f3b57;
+  display: grid; place-items: center; color: var(--accent); font-weight: 700;
+}
+.brand-title { font-size: 13px; font-weight: 650; }
+.brand-sub { font-size: 11px; color: var(--muted); }
+nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+nav button {
+  background: transparent; border: 0; color: var(--text); text-align: left;
+  padding: 9px 10px; border-radius: 6px; cursor: pointer;
+}
+nav button:hover { background: #222b38; }
+nav button.active { background: #24344a; color: #d7e8f8; }
+.sidebar-status {
+  font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px;
+}
+main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 22px; border-bottom: 1px solid var(--line);
+}
+.topbar h1 { margin: 0; font-size: 20px; font-weight: 600; }
+.top-meta { display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: 12px; }
+.sim-banner {
+  background: #3a2e14; color: #f0d48a; border: 1px solid #6a5420;
+  padding: 3px 8px; border-radius: 999px; font-weight: 650;
+}
+.sim-banner.large { display: inline-block; margin: 0 22px 12px; padding: 8px 12px; }
+.view { padding: 18px 22px 28px; overflow: auto; }
+.hidden { display: none; }
+.lead { color: var(--muted); max-width: 80ch; }
+.note { color: var(--muted); font-size: 13px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.cards article, .chart-card, .side-panel, .viewport-wrap {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
+}
+.cards article { padding: 14px; }
+.cards article h3 { margin: 0 0 8px; font-size: 15px; }
+.cards article p { margin: 0; color: var(--muted); font-size: 13px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 10px; }
+button, .button-link, input, select {
+  background: #243044; color: var(--text); border: 1px solid var(--line); border-radius: 6px;
+  padding: 7px 10px; font: inherit;
+}
+button, .button-link { cursor: pointer; text-decoration: none; display: inline-block; }
+button:hover, .button-link:hover { border-color: var(--accent); }
+.log {
+  background: #10161e; border: 1px solid var(--line); border-radius: 8px; padding: 12px;
+  white-space: pre-wrap; color: #c5d0dc; font-size: 12px; min-height: 80px;
+}
+.split { display: grid; grid-template-columns: 1.4fr .8fr; gap: 12px; min-height: 420px; }
+.viewport-wrap { position: relative; min-height: 420px; }
+#geo-canvas { width: 100%; height: 420px; display: block; border-radius: 10px; }
+.legend {
+  position: absolute; right: 10px; top: 10px; background: rgba(16,22,30,.88);
+  padding: 8px; border-radius: 6px; font-size: 11px;
+}
+.side-panel { padding: 12px; }
+.chart-card { padding: 12px; min-height: 280px; }
+.arch { width: 100%; max-width: 760px; margin: 12px 0; }
+.arch-box { fill: #243044; stroke: #5b7390; }
+.arch-box.jtag { fill: #3a2e14; stroke: #b7923a; }
+.arch text { fill: var(--text); font-size: 14px; }
+.arch text.small { font-size: 11px; fill: var(--muted); }
+.arch line { stroke: #7f90a6; stroke-width: 2; }
+.busy {
+  position: fixed; inset: 0; background: rgba(8,10,14,.45); display: grid; place-items: center;
+}
+.busy-card { background: var(--panel); padding: 18px 22px; border-radius: 10px; border: 1px solid var(--line); }
+@media (max-width: 980px) {
+  body { flex-direction: column; }
+  .sidebar { width: 100%; }
+  nav { flex-direction: row; flex-wrap: wrap; }
+  .split { grid-template-columns: 1fr; }
+}

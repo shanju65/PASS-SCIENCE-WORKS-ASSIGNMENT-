@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+bin/
+obj/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# Visual Studio & IDE temporary files
+.vs/
+*.user
+*.suo
+x64/
+Debug/
+Release/
+
+# Antigravity / Agent temporary files
+powershell.cmd
+.system_generated/
+*.tmp
