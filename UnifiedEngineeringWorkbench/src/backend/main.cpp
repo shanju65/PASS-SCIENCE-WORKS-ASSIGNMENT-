@@ -28,6 +28,19 @@ int main(int argc, char* argv[]) {
     std::signal(SIGINT, signal_handler);
     std::signal(SIGTERM, signal_handler);
 
+#if defined(_WIN32)
+    // Anchor current working directory to the directory where Launch.exe resides
+    // This ensures double-clicking from shortcuts, start menu, or external directories always finds frontend/ and data/
+    char exe_path[MAX_PATH];
+    if (GetModuleFileNameA(NULL, exe_path, MAX_PATH)) {
+        std::string path_str(exe_path);
+        size_t last_slash = path_str.find_last_of("\\/");
+        if (last_slash != std::string::npos) {
+            SetCurrentDirectoryA(path_str.substr(0, last_slash).c_str());
+        }
+    }
+#endif
+
     std::cout << "========================================================\n";
     std::cout << "  UNIFIED ENGINEERING WORKBENCH - C++17 CORE BACKEND    \n";
     std::cout << "  PASS SCIENCE WORKS | R&D INTERNSHIP 2026-2027         \n";
@@ -36,20 +49,28 @@ int main(int argc, char* argv[]) {
     // Initialize embedded hardware manager
     auto hw_mgr = std::make_shared<uew::hardware::HardwareManager>();
 
-    // Start HTTP server (attempt port 8080, fallback to 8081 if occupied)
+    // Start HTTP server (attempt port 8080, fallback to 8081 or 8082 if occupied)
     int port = 8080;
-    uew::api::HttpServer server(port, "frontend");
-    uew::api::register_all_routes(server, hw_mgr);
+    std::unique_ptr<uew::api::HttpServer> active_server = std::make_unique<uew::api::HttpServer>(port, "frontend");
+    uew::api::register_all_routes(*active_server, hw_mgr);
 
-    bool started = server.start(true);
+    bool started = active_server->start(true);
     if (!started) {
         port = 8081;
         std::cout << "[WARN] Port 8080 occupied, falling back to port " << port << "...\n";
-        uew::api::HttpServer server_fallback(port, "frontend");
-        uew::api::register_all_routes(server_fallback, hw_mgr);
-        if (!server_fallback.start(true)) {
-            std::cerr << "[ERROR] Failed to bind local HTTP server to port " << port << ".\n";
-            return 1;
+        active_server = std::make_unique<uew::api::HttpServer>(port, "frontend");
+        uew::api::register_all_routes(*active_server, hw_mgr);
+        started = active_server->start(true);
+        if (!started) {
+            port = 8082;
+            std::cout << "[WARN] Port 8081 occupied, falling back to port " << port << "...\n";
+            active_server = std::make_unique<uew::api::HttpServer>(port, "frontend");
+            uew::api::register_all_routes(*active_server, hw_mgr);
+            started = active_server->start(true);
+            if (!started) {
+                std::cerr << "[ERROR] Failed to bind local HTTP server to ports 8080, 8081, or 8082.\n";
+                return 1;
+            }
         }
     }
 
@@ -71,7 +92,9 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "\n[INFO] Graceful shutdown initiated...\n";
-    server.stop();
+    if (active_server) {
+        active_server->stop();
+    }
     std::cout << "[INFO] Shutdown complete. Goodbye!\n";
     return 0;
 }
