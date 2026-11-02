@@ -178,24 +178,6 @@ build\Release\workbench_tests.exe
 
 ---
 
-## 7. Rubric Compliance Self-Evaluation (100 Points)
-
-| Rubric Item | Points | Implementation Evidence & Verification |
-| :--- | :---: | :--- |
-| **Interface / webpage design** | 8 / 8 | Responsive dashboard, Three.js 3D viewport, Chart.js, clear status indicators. |
-| **C++ backend and testing** | 12 / 12 | Clean separation of concerns, Winsock HTTP API, 60/60 automated tests passing. |
-| **Folder architecture** | 6 / 6 | Sensible directories (`src/`, `frontend/`, `data/`, `results/`, `docs/`, `tests/`). |
-| **Code readability** | 6 / 6 | Clean C++17, focused functions, comprehensive Doxygen comments. |
-| **Version control** | 5 / 5 | Meaningful Git commit history, `.gitignore`, dependency documentation. |
-| **Thermal FEA and adoption** | 14 / 14 | Thomas $O(N)$ solver, exact analytical comparison, $O(h^2)$ midpoint error verification. |
-| **CAD / ANSYS visualization** | 10 / 10 | ASCII STL & ANSYS CSV parsers in C++, Three.js point cloud, legend & node inspector. |
-| **Multicore performance** | 10 / 10 | Reproducible batch solves (seed 42), 5 repetitions + warmup, parity $\le 10^{-8\ \circ}\text{C}$. |
-| **Embedded integration** | 8 / 8 | MCU, FPGA, JTAG probe models, pin-voltage table, timeout fault injection & recovery. |
-| **Backpropagation** | 7 / 7 | Manual chain-rule derivations, central finite differences ($\le 10^{-5}$), 100-step plot. |
-| **Prompt engineering / AI log** | 8 / 8 | Exhaustive `docs/AI_USE_LOG.md` with challenge tests and unsuitable suggestion audits. |
-| **One-click delivery / report** | 6 / 6 | Standalone `Launch.exe` in root, 6-page technical report, complete documentation. |
-| **Total Score** | **100 / 100** | **Strong Interview Shortlist Tier** |
-
 ---
 
 ## 8. Known Limitations
