@@ -14,9 +14,10 @@
 > **No installation, no terminal commands, no PowerShell, no administrator rights, and no internet connection required.**
 
 1. Extract the submission ZIP: `CandidateID_Workbench.zip`.
-2. Double-click **`Launch.exe`** in the root folder.
-3. The native C++17 Winsock backend will initialize on `http://localhost:8080` and automatically open your default browser.
-4. Interact with the full engineering workbench!
+2. Open the extracted `CandidateID_Workbench` folder.
+3. Double-click **`Launch.exe`** in that folder.
+4. The native C++17 Winsock backend will initialize on `http://localhost:8080` and automatically open your default browser.
+5. Interact with the full engineering workbench!
 
 *(To stop the application, press `Ctrl+C` in the backend console window or simply close the console).*
 

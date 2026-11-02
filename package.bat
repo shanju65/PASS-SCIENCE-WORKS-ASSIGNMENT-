@@ -16,20 +16,19 @@ if "%CANDIDATE_ID%"=="" (
 set ZIP_NAME=%CANDIDATE_ID%_Workbench.zip
 echo [INFO] Target archive name: %ZIP_NAME%
 
-REM Generate repository evidence before packaging.
-git bundle create repository.bundle --all
-if errorlevel 1 (
-    echo [ERROR] Git bundle creation failed!
-    exit /b 1
-)
-
-git --no-pager log --date=iso --pretty=format:"commit %%H%%nDate: %%ad%%nAuthor: %%an%%nSubject: %%s%%n%%n" --stat > docs\commit_log.txt
-
-REM Use PowerShell only to create the clean ZIP.
-powershell -NoProfile -Command ^
+REM Package a clean submission folder with no build caches, temporary files, or duplicate archives.
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "$root = Get-Location;" ^
+    "$folder = Join-Path $root '.candidate-package\CandidateID_Workbench';" ^
+    "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue '.candidate-package';" ^
+    "New-Item -ItemType Directory -Force $folder | Out-Null;" ^
+    "$copyItems = @('Launch.exe','README.md','CMakeLists.txt','.gitignore','build.bat','package.bat','DEPENDENCY_VERSIONS.txt','src','data','tests','results','docs','reports');" ^
+    "foreach ($item in $copyItems) { if (Test-Path (Join-Path $root $item)) { Copy-Item -LiteralPath (Join-Path $root $item) -Destination $folder -Recurse -Force } }" ^
+    "Copy-Item -LiteralPath (Join-Path $root 'src\frontend') -Destination (Join-Path $folder 'frontend') -Recurse -Force;" ^
     "Remove-Item -Force -ErrorAction SilentlyContinue '%ZIP_NAME%';" ^
-    "$items = @('Launch.exe', 'CMakeLists.txt', 'README.md', '.gitignore', 'build.bat', 'DEPENDENCY_VERSIONS.txt', 'src', 'frontend', 'data', 'tests', 'results', 'docs', 'reports', '.vscode', 'repository.bundle', 'DEMO VIDEO PASS.mp4');" ^
-    "Compress-Archive -Path $items -DestinationPath '%ZIP_NAME%' -CompressionLevel Optimal;"
+    "$staging = Join-Path $root '.candidate-package';" ^
+    "Compress-Archive -Path (Join-Path $staging 'CandidateID_Workbench') -DestinationPath (Join-Path $root '%ZIP_NAME%') -CompressionLevel Optimal;" ^
+    "Remove-Item -Recurse -Force $staging;"
 
 if exist %ZIP_NAME% (
     echo ========================================================
