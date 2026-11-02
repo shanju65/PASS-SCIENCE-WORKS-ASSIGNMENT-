@@ -8,6 +8,7 @@
 [![One--Click](https://img.shields.io/badge/Standalone-Launch.exe-orange.svg)](Launch.exe)
 
 ---
+DEMO VIDEO: https://drive.google.com/file/d/1Znhid6DeKUz_H0cAMGKOgLWnrJI2Kbp1/view?usp=drive_link
 
 ## 1. Quick Start: One-Click Execution (Windows 11)
 
