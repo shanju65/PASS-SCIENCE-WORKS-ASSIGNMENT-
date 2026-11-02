@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="20">Thermal FEA Midpoint Error Convergence</text>
+  <text x="400" y="475" text-anchor="middle" font-family="Arial" font-size="14">Elements N</text>
+  <text x="25" y="250" text-anchor="middle" font-family="Arial" font-size="14" transform="rotate(-90 25 250)">Maximum midpoint error (C)</text>
+  <line x1="100" y1="430" x2="740" y2="430" stroke="#333"/>
+  <line x1="100" y1="430" x2="100" y2="70" stroke="#333"/>
+  <polyline points="100,105 313,230 526,335 740,397" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <g fill="#2563eb"><circle cx="100" cy="105" r="7"/><circle cx="313" cy="230" r="7"/><circle cx="526" cy="335" r="7"/><circle cx="740" cy="397" r="7"/></g>
+  <g font-family="Arial" font-size="13" fill="#111">
+    <text x="90" y="450">10</text><text x="303" y="450">20</text><text x="516" y="450">40</text><text x="730" y="450">80</text>
+    <text x="115" y="100">1.250000</text><text x="328" y="225">0.312500</text><text x="541" y="330">0.078125</text><text x="755" y="392">0.019531</text>
+  </g>
+  <text x="400" y="465" text-anchor="middle" font-family="Arial" font-size="12">Error reduction ratios: 4.0000x, 4.0000x, 4.0000x</text>
+</svg>

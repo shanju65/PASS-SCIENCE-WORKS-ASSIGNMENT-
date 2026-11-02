@@ -1,0 +1,10 @@
+C++ language standard: C++17
+Build system: CMake 3.20+
+Compiler: Visual Studio 2019 Build Tools MSVC 19.29 / tested MSVC x64
+Operating system target: Windows 10/11 x64
+Windows SDK: 10.0.19041 or compatible installed SDK
+System library: Windows Sockets 2 (ws2_32)
+Frontend libraries:
+- Three.js r128, bundled as frontend/scripts/three.min.js
+- Chart.js 4.4.1-compatible bundle, bundled as frontend/scripts/chart.min.js
+No third-party C++ package manager, runtime package, Python package, or network dependency is required.

@@ -197,7 +197,7 @@ void test_hardware_simulation() {
 // Test Suite 5: Backpropagation & Gradients (Task F)
 // -------------------------------------------------------------
 void test_backpropagation() {
-    std::cout << "\n=== [TEST SUITE 5] Handwritten Backpropagation Tests ===\n";
+    std::cout << "\n=== [TEST SUITE 5] Backpropagation Tests ===\n";
 
     const double x = 1.0;
     const double y = 2.0;

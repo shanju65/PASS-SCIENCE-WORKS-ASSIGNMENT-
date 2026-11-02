@@ -823,6 +823,8 @@ async function runBackpropagationStudy() {
         document.getElementById('nn-step1-params').textContent = 
             `w=${s1.w.toFixed(4)}, b=${s1.b.toFixed(4)}, v=${s1.v.toFixed(4)}, c=${s1.c.toFixed(4)} (Loss J1: ${s1.loss_J.toFixed(4)})`;
 
+        populateNeuralDerivation(data);
+
         // Finite difference table
         populateFiniteDiffTable(data.finite_difference_checks);
 
@@ -843,22 +845,56 @@ function populateFiniteDiffTable(checks) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td><strong>${chk.param}</strong></td>
-            <td>${chk.analytical.toFixed(6)}</td>
-            <td>${chk.numerical.toFixed(6)}</td>
-            <td>${chk.error.toExponential(4)}</td>
+            <td>${chk.analytical.toFixed(10)}</td>
+            <td>${chk.numerical.toFixed(10)}</td>
+            <td>${chk.error.toExponential(10)}</td>
             <td><span class="badge ${chk.passed ? 'badge-success' : 'badge-danger'}">${chk.passed ? 'PASS (|Err| <= 1e-5)' : 'FAIL'}</span></td>
         `;
         tbody.appendChild(tr);
     });
 }
 
+function populateNeuralDerivation(data) {
+    const f = data.initial_forward;
+    const g = data.initial_gradients;
+    const p = data.initial_params;
+    const residual = f.y_hat - f.y;
+    const dhDz = 1.0 - f.h * f.h;
+    const dJDh = residual * p.v;
+    const dJDz = dJDh * dhDz;
+    const derivation = document.getElementById('nn-digital-derivation');
+    if (!derivation) return;
+
+    derivation.textContent =
+`Forward propagation:
+z = w*x + b = ${p.w.toFixed(10)}*${f.x.toFixed(10)} + ${p.b.toFixed(10)} = ${f.z.toFixed(10)}
+h = tanh(z) = tanh(${f.z.toFixed(10)}) = ${f.h.toFixed(10)}
+y_hat = v*h + c = ${p.v.toFixed(10)}*${f.h.toFixed(10)} + ${p.c.toFixed(10)} = ${f.y_hat.toFixed(10)}
+Residual e = y_hat - y = ${f.y_hat.toFixed(10)} - ${f.y.toFixed(10)} = ${residual.toFixed(10)}
+Loss J = 0.5*(y_hat - y)^2 = 0.5*(${residual.toFixed(10)})^2 = ${f.loss_J.toFixed(10)}
+
+Chain-rule gradients:
+dJ/dy_hat = y_hat - y = ${residual.toFixed(10)}
+dJ/dv = (dJ/dy_hat)*h = ${residual.toFixed(10)}*${f.h.toFixed(10)} = ${g.dJ_dv.toFixed(10)}
+dJ/dc = (dJ/dy_hat)*1 = ${g.dJ_dc.toFixed(10)}
+dJ/dh = (dJ/dy_hat)*(dy_hat/dh) = (y_hat-y)*v
+      = ${residual.toFixed(10)}*${p.v.toFixed(10)} = ${dJDh.toFixed(10)}
+dh/dz = 1-tanh^2(z) = 1-h^2 = 1-${f.h.toFixed(10)}^2 = ${dhDz.toFixed(10)}
+dJ/dz = (dJ/dh)*(dh/dz) = ${dJDh.toFixed(10)}*${dhDz.toFixed(10)} = ${dJDz.toFixed(10)}
+dJ/dw = (dJ/dz)*(dz/dw) = (dJ/dz)*x = ${g.dJ_dw.toFixed(10)}
+dJ/db = (dJ/dz)*(dz/db) = (dJ/dz)*1 = ${g.dJ_db.toFixed(10)}
+
+v is included explicitly in dJ/dh: dJ/dh = (dJ/dy_hat)*v.`;
+}
+
 function renderNeuralLossChart(history) {
     const ctx = document.getElementById('chart-neural-loss');
     if (!ctx || typeof Chart === 'undefined') return;
 
-    const labels = history.map(h => h.step);
-    const losses = history.map(h => h.loss);
-    const yHats = history.map(h => h.y_hat);
+    const trainingHistory = history.filter(h => h.step >= 1 && h.step <= 100);
+    const labels = trainingHistory.map(h => h.step);
+    const losses = trainingHistory.map(h => h.loss);
+    const yHats = trainingHistory.map(h => h.y_hat);
 
     if (neuralLossChart) neuralLossChart.destroy();
 

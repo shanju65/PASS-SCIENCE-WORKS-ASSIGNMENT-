@@ -157,12 +157,12 @@ Given $x = 1, y = 2$, $h = \tanh(wx + b)$, $\hat{y} = vh + c$, $J = \frac{1}{2}(
 ### Central Finite-Difference Verification ($\epsilon = 10^{-6}$):
 | Parameter | Analytical Gradient | Finite-Difference Approx | Absolute Error | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **$w$** | -1.20946450 | -1.20946450 | $0.00 \times 10^{-7}$ | **PASS ($\le 10^{-5}$)** |
-| **$b$** | -1.20946450 | -1.20946450 | $0.00 \times 10^{-7}$ | **PASS ($\le 10^{-5}$)** |
-| **$v$** | -0.71068205 | -0.71068205 | $0.00 \times 10^{-7}$ | **PASS ($\le 10^{-5}$)** |
-| **$c$** | -1.53788284 | -1.53788284 | $0.00 \times 10^{-7}$ | **PASS ($\le 10^{-5}$)** |
+| **$w$** | -1.209464475240061 | -1.209464475127042 | $1.1301893 \times 10^{-10}$ | **PASS ($\le 10^{-5}$)** |
+| **$b$** | -1.209464475240061 | -1.209464475127042 | $1.1301893 \times 10^{-10}$ | **PASS ($\le 10^{-5}$)** |
+| **$v$** | -0.710682047485947 | -0.710682047433409 | $5.253831 \times 10^{-11}$ | **PASS ($\le 10^{-5}$)** |
+| **$c$** | -1.537882842739990 | -1.537882842628235 | $1.1175483 \times 10^{-10}$ | **PASS ($\le 10^{-5}$)** |
 
-Over 100 subsequent training steps with $\eta = 0.1$, the loss decreases monotonically from $1.1825$ to $0.00000010$, confirming stable gradient-descent convergence.
+Over 100 subsequent training steps with $\eta = 0.1$, the loss decreases monotonically from $1.182541819$ to approximately $1.70262 \times 10^{-20}$, confirming stable gradient-descent convergence.
 
 ---
 

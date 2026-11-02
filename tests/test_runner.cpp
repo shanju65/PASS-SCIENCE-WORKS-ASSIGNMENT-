@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 #include "core/thermal_solver.hpp"
 #include "geometry/stl_parser.hpp"
@@ -197,7 +199,7 @@ void test_hardware_simulation() {
 // Test Suite 5: Backpropagation & Gradients (Task F)
 // -------------------------------------------------------------
 void test_backpropagation() {
-    std::cout << "\n=== [TEST SUITE 5] Handwritten Backpropagation Tests ===\n";
+    std::cout << "\n=== [TEST SUITE 5] Backpropagation Tests ===\n";
 
     const double x = 1.0;
     const double y = 2.0;
@@ -221,7 +223,11 @@ void test_backpropagation() {
     auto checks = uew::neural::verify_gradients_finite_difference(x, y, p, grads, 1.0e-6);
     TEST_ASSERT(checks.size() == 4, "Finite difference executed for all 4 parameters (w, b, v, c)");
     for (const auto& chk : checks) {
-        std::string desc = "Finite diff check for " + chk.parameter_name + " (error: " + std::to_string(chk.absolute_error) + " <= 1e-5)";
+        std::ostringstream description;
+        description << "Finite diff check for " << chk.parameter_name
+                    << " (error: " << std::scientific << std::setprecision(12)
+                    << chk.absolute_error << " <= 1e-5)";
+        std::string desc = description.str();
         TEST_ASSERT(chk.passed, desc);
     }
 

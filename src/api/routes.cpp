@@ -396,9 +396,11 @@ void register_all_routes(HttpServer& server, std::shared_ptr<hardware::HardwareM
         auto rep = neural::run_full_backpropagation_study(0.1, 100);
 
         std::ostringstream oss;
-        oss << std::fixed << std::setprecision(8);
+        oss << std::fixed << std::setprecision(17);
         oss << "{"
             << "\"success\":true,"
+            << "\"initial_params\":{\"w\":" << rep.initial_params.w << ",\"b\":" << rep.initial_params.b
+            << ",\"v\":" << rep.initial_params.v << ",\"c\":" << rep.initial_params.c << "},"
             << "\"initial_forward\":{"
             << "\"x\":" << rep.initial_forward.x << ",\"y\":" << rep.initial_forward.y
             << ",\"z\":" << rep.initial_forward.z << ",\"h\":" << rep.initial_forward.h

@@ -95,11 +95,6 @@ BackpropReport run_full_backpropagation_study(double learning_rate = 0.1, int to
  */
 std::string export_training_history_csv(const BackpropReport& report);
 
-/**
- * @brief Generates complete markdown template for handwritten appendix.
- */
-std::string get_handwritten_derivation_template();
-
 } // namespace uew::neural
 
 #endif // UEW_NEURAL_BACKPROP_ENGINE_HPP

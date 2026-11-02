@@ -20,6 +20,13 @@
 
 *(To stop the application, press `Ctrl+C` in the backend console window or simply close the console).*
 
+## Prerequisites
+- 64-bit Windows 10/11.
+- A desktop browser for viewing the local dashboard (Microsoft Edge, Chrome, or Firefox).
+- For one-click use, no additional runtime or package installation is required.
+- For source builds: Visual Studio 2019 Build Tools with MSVC C++ workload, Windows SDK 10.0.19041 or compatible SDK, CMake 3.20+, and Git for version-control commands.
+- `127.0.0.1:8080` must be available; no internet connection is required.
+
 ---
 
 ## 2. Supported Formats & File Types
@@ -117,7 +124,7 @@ The automated test runner (`tests/test_runner.cpp`) validates all 5 core modules
   [PASS] Device returns to Connected state
   [PASS] MCU disconnects cleanly
 
-=== [TEST SUITE 5] Handwritten Backpropagation Tests ===
+=== [TEST SUITE 5] Backpropagation Tests ===
   [PASS] z == 0.5 exact
   [PASS] h == tanh(0.5) ~ 0.462117 exact
   [PASS] Initial Loss J ~ 1.18254 exact
@@ -126,10 +133,10 @@ The automated test runner (`tests/test_runner.cpp`) validates all 5 core modules
   [PASS] dJ/dw is negative
   [PASS] dJ/db is negative
   [PASS] Finite difference executed for all 4 parameters (w, b, v, c)
-  [PASS] Finite diff check for w (error: 0.000000 <= 1e-5)
-  [PASS] Finite diff check for b (error: 0.000000 <= 1e-5)
-  [PASS] Finite diff check for v (error: 0.000000 <= 1e-5)
-  [PASS] Finite diff check for c (error: 0.000000 <= 1e-5)
+  [PASS] Finite diff check for w (error: 1.1301893e-10 <= 1e-5)
+  [PASS] Finite diff check for b (error: 1.1301893e-10 <= 1e-5)
+  [PASS] Finite diff check for v (error: 5.253831e-11 <= 1e-5)
+  [PASS] Finite diff check for c (error: 1.1175483e-10 <= 1e-5)
   [PASS] Recorded 100 training steps (steps 0 to 100)
   [PASS] Loss strictly decreased over training
   [PASS] Loss converged towards zero (J_100 < 0.05)

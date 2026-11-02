@@ -66,7 +66,6 @@ In accordance with Section 8 and Rubric Criterion "Prompt engineering / AI judge
     $\frac{\partial J}{\partial v} = (\hat{y}-y)h$, $\frac{\partial J}{\partial c} = \hat{y}-y$, $\frac{\partial J}{\partial w} = (\hat{y}-y)v(1-h^2)x$, $\frac{\partial J}{\partial b} = (\hat{y}-y)v(1-h^2)$
   - Numerical values at Step 0: $h \approx 0.462117$, $\hat{y} \approx 0.462117$, $J \approx 1.182542$.
 - **Candidate Edits & Refinements**:
-  - Authored a dedicated handwritten derivation template for the 2-page appendix.
   - C++ engine recorded 100-step training history showing monotonic loss reduction to $< 0.05$.
 - **Independent Verification**:
   - Central finite differences verified across all four parameters: error $< 10^{-7} \le 10^{-5}$ [PASS].

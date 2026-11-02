@@ -3,21 +3,18 @@ setlocal enabledelayedexpansion
 
 echo ========================================================
 echo   BUILDING UNIFIED ENGINEERING WORKBENCH (MSVC x64)
-echo   PASS SCIENCE WORKS R&D INTERNSHIP 2026-2027
+echo   PASS SCIENCE WORKS R^&D INTERNSHIP 2026-2027
 echo ========================================================
 
 REM 1. Initialize MSVC 64-bit environment
-if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat" (
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-) else (
-    echo [WARN] Visual Studio 2019 BuildTools path not found, relying on existing environment...
+where cl >nul 2>nul
+if errorlevel 1 (
+    echo [ERROR] MSVC C++ build environment is not initialized. Run from a Visual Studio Developer Command Prompt.
+    exit /b 1
 )
 
 REM 2. Locate CMake
-set CMAKE_BIN="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
-if not exist %CMAKE_BIN% (
-    set CMAKE_BIN=cmake
-)
+set CMAKE_BIN=cmake
 
 REM 3. Configure CMake
 echo [1/4] Configuring project via CMake...

@@ -491,7 +491,7 @@ Fe = (q·A·le / 2) * [ 1, 1 ]^T</code></pre>
         <section id="tab-backprop" class="tab-pane">
             <div class="pane-grid-2col">
                 <div class="dashboard-card">
-                    <h3>Handwritten Neural Network Regression Setup</h3>
+                    <h3>Neural Network Regression Setup</h3>
                     <p class="hint-text">
                         Single regression sample: <code>x = 1.0</code>, target <code>y = 2.0</code><br>
                         Initial parameters: <code>w = 0.5, b = 0.0, v = 1.0, c = 0.0</code>, learning rate <code>&eta; = 0.1</code>
@@ -537,20 +537,9 @@ Fe = (q·A·le / 2) * [ 1, 1 ]^T</code></pre>
                 </div>
 
                 <div class="dashboard-card">
-                    <h3>Manual Chain-Rule Derivations & Explanation</h3>
+                    <h3>Digital Explanation: Forward Pass & Chain-Rule Derivations</h3>
                     <div class="text-content-box">
-                        <pre><code>Loss: J = 0.5 · (y_hat - y)²
-dJ / dy_hat = (y_hat - y) = 0.4621 - 2.0 = -1.5379
-
-dJ / dv = (y_hat - y) · h = (-1.5379) · 0.4621 = -0.7107
-dJ / dc = (y_hat - y) = -1.5379
-
-dJ / dh = (y_hat - y) · v = -1.5379
-dh / dz = 1 - tanh²(z) = 1 - (0.4621)² = 0.7864
-dJ / dz = (-1.5379) · (0.7864) = -1.2095
-
-dJ / dw = (dJ / dz) · x = -1.2095
-dJ / db = (dJ / dz) · 1 = -1.2095</code></pre>
+                        <pre><code id="nn-digital-derivation"></code></pre>
                         <p><strong>Gradient Direction:</strong> Because <code>y_hat < y</code>, the residual error is negative, making all partial derivatives negative. Gradient descent subtracts <code>&eta; · grad</code>, thereby adding positive increments to all weights and driving <code>y_hat</code> towards 2.0.</p>
                     </div>
                 </div>

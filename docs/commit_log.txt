@@ -1,0 +1,114 @@
+commit 27e1a13adced84a3daedcdffefa768c7f930ce60
+Date: 2026-11-01 23:01:17 +0530
+Author: Candidate
+Subject: fix(backend): anchor working directory via GetModuleFileNameA and extend active_server lifetime across port fallbacks
+
+
+ CandidateID_Workbench.zip                        | Bin 0 -> 407599 bytes
+ Launch.exe                                       | Bin 222720 -> 225280 bytes
+ UnifiedEngineeringWorkbench/Launch.exe           | Bin 222720 -> 225280 bytes
+ UnifiedEngineeringWorkbench/src/backend/main.cpp |  43 +++++++++++++++++------
+ actual_test_output.txt                           | Bin 0 -> 7584 bytes
+ src/backend/main.cpp                             |  43 +++++++++++++++++------
+ 6 files changed, 66 insertions(+), 20 deletions(-)
+
+commit bdf5d54c84f48cc24ffc895aacbd160d126ebf2f
+Date: 2026-11-01 22:22:32 +0530
+Author: Candidate
+Subject: feat(release): initial complete implementation of Unified Engineering Workbench with 60/60 passing tests and Launch.exe
+
+
+ .gitignore                                         |  22 +
+ .vscode/launch.json                                |  27 +
+ CMakeLists.txt                                     |  50 ++
+ Launch.exe                                         | Bin 0 -> 222720 bytes
+ README.md                                          | 196 +++++
+ UnifiedEngineeringWorkbench/.gitignore             |  22 +
+ UnifiedEngineeringWorkbench/.vscode/launch.json    |  27 +
+ UnifiedEngineeringWorkbench/CMakeLists.txt         |  50 ++
+ UnifiedEngineeringWorkbench/Launch.exe             | Bin 0 -> 222720 bytes
+ UnifiedEngineeringWorkbench/README.md              | 196 +++++
+ UnifiedEngineeringWorkbench/build.bat              |  56 ++
+ UnifiedEngineeringWorkbench/data/README.md         |  24 +
+ .../data/example_geometry.stl                      |  86 ++
+ .../data/example_temperature.csv                   |  32 +
+ UnifiedEngineeringWorkbench/docs/AI_USE_LOG.md     |  99 +++
+ UnifiedEngineeringWorkbench/docs/architecture.md   |  83 ++
+ UnifiedEngineeringWorkbench/docs/assumptions.md    |  44 +
+ .../docs/embedded_design.md                        |  38 +
+ .../docs/numerical_methods.md                      |  86 ++
+ UnifiedEngineeringWorkbench/frontend/index.html    | 680 ++++++++++++++++
+ .../frontend/scripts/api.js                        |  29 +
+ .../frontend/scripts/app.js                        | 906 +++++++++++++++++++++
+ .../frontend/scripts/chart.min.js                  |  14 +
+ .../frontend/scripts/three.min.js                  |   6 +
+ .../frontend/styles/app.css                        |  97 +++
+ .../frontend/styles/main.css                       | 685 ++++++++++++++++
+ .../reports/technical_report.md                    | 185 +++++
+ .../backpropagation/neural_backprop_training.csv   |  22 +
+ .../results/performance/multicore_benchmark.csv    |  13 +
+ .../results/thermal/thermal_fea_results.csv        |  32 +
+ .../src/api/http_server.cpp                        | 273 +++++++
+ .../src/api/http_server.hpp                        |  81 ++
+ UnifiedEngineeringWorkbench/src/api/routes.cpp     | 480 +++++++++++
+ UnifiedEngineeringWorkbench/src/api/routes.hpp     |  16 +
+ UnifiedEngineeringWorkbench/src/backend/main.cpp   |  77 ++
+ UnifiedEngineeringWorkbench/src/core/json.hpp      | 330 ++++++++
+ .../src/core/linear_solver.hpp                     |  86 ++
+ .../src/core/thermal_fem.hpp                       | 163 ++++
+ .../src/core/thermal_solver.cpp                    | 192 +++++
+ .../src/core/thermal_solver.hpp                    |  83 ++
+ .../src/geometry/csv_parser.cpp                    | 218 +++++
+ .../src/geometry/csv_parser.hpp                    |  53 ++
+ .../src/geometry/stl_parser.cpp                    | 215 +++++
+ .../src/geometry/stl_parser.hpp                    |  58 ++
+ .../src/geometry/temperature_csv.hpp               | 183 +++++
+ .../src/hardware/devices.hpp                       | 175 ++++
+ .../src/hardware/hardware_manager.cpp              | 406 +++++++++
+ .../src/hardware/hardware_manager.hpp              |  93 +++
+ .../src/neural/backprop.hpp                        | 168 ++++
+ .../src/neural/backprop_engine.cpp                 | 259 ++++++
+ .../src/neural/backprop_engine.hpp                 | 105 +++
+ .../src/performance/benchmark.hpp                  | 212 +++++
+ .../src/performance/host_info.hpp                  | 103 +++
+ .../src/performance/multicore_engine.cpp           | 299 +++++++
+ .../src/performance/multicore_engine.hpp           |  93 +++
+ .../src/performance/thread_pool.hpp                |  72 ++
+ .../tests/fixtures/bad_missing_columns.csv         |   2 +
+ UnifiedEngineeringWorkbench/tests/test_runner.cpp  | 252 ++++++
+ build.bat                                          |  56 ++
+ data/example_geometry.stl                          |  86 ++
+ data/example_temperature.csv                       |  32 +
+ docs/AI_USE_LOG.md                                 |  99 +++
+ docs/architecture.md                               |  83 ++
+ docs/assumptions.md                                |  44 +
+ docs/embedded_design.md                            |  38 +
+ docs/numerical_methods.md                          |  86 ++
+ frontend/index.html                                | 680 ++++++++++++++++
+ frontend/scripts/app.js                            | 906 +++++++++++++++++++++
+ frontend/scripts/chart.min.js                      |  14 +
+ frontend/scripts/three.min.js                      |   6 +
+ frontend/styles/main.css                           | 685 ++++++++++++++++
+ reports/technical_report.md                        | 185 +++++
+ .../backpropagation/neural_backprop_training.csv   |  22 +
+ results/performance/multicore_benchmark.csv        |  13 +
+ results/thermal/thermal_fea_results.csv            |  32 +
+ src/api/http_server.cpp                            | 273 +++++++
+ src/api/http_server.hpp                            |  81 ++
+ src/api/routes.cpp                                 | 480 +++++++++++
+ src/api/routes.hpp                                 |  16 +
+ src/backend/main.cpp                               |  77 ++
+ src/core/thermal_solver.cpp                        | 192 +++++
+ src/core/thermal_solver.hpp                        |  83 ++
+ src/geometry/csv_parser.cpp                        | 218 +++++
+ src/geometry/csv_parser.hpp                        |  53 ++
+ src/geometry/stl_parser.cpp                        | 215 +++++
+ src/geometry/stl_parser.hpp                        |  58 ++
+ src/hardware/hardware_manager.cpp                  | 406 +++++++++
+ src/hardware/hardware_manager.hpp                  |  93 +++
+ src/neural/backprop_engine.cpp                     | 259 ++++++
+ src/neural/backprop_engine.hpp                     | 105 +++
+ src/performance/multicore_engine.cpp               | 299 +++++++
+ src/performance/multicore_engine.hpp               |  93 +++
+ tests/test_runner.cpp                              | 252 ++++++
+ 93 files changed, 14874 insertions(+)

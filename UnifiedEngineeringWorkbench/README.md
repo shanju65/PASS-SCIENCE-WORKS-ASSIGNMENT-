@@ -117,7 +117,7 @@ The automated test runner (`tests/test_runner.cpp`) validates all 5 core modules
   [PASS] Device returns to Connected state
   [PASS] MCU disconnects cleanly
 
-=== [TEST SUITE 5] Handwritten Backpropagation Tests ===
+=== [TEST SUITE 5] Backpropagation Tests ===
   [PASS] z == 0.5 exact
   [PASS] h == tanh(0.5) ~ 0.462117 exact
   [PASS] Initial Loss J ~ 1.18254 exact

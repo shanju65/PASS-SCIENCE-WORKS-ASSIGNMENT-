@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="20">Multicore Median Speedup</text>
+  <text x="400" y="475" text-anchor="middle" font-family="Arial" font-size="14">Worker count</text>
+  <text x="25" y="250" text-anchor="middle" font-family="Arial" font-size="14" transform="rotate(-90 25 250)">Speedup (x)</text>
+  <line x1="100" y1="430" x2="740" y2="430" stroke="#333"/>
+  <line x1="100" y1="430" x2="100" y2="70" stroke="#333"/>
+  <polyline points="100,430 313,250 526,180 740,102" fill="none" stroke="#dc2626" stroke-width="4"/>
+  <g fill="#dc2626"><circle cx="100" cy="430" r="7"/><circle cx="313" cy="250" r="7"/><circle cx="526" cy="180" r="7"/><circle cx="740" cy="102" r="7"/></g>
+  <g font-family="Arial" font-size="13" fill="#111">
+    <text x="90" y="450">1</text><text x="303" y="450">2</text><text x="516" y="450">3</text><text x="730" y="450">4</text>
+    <text x="115" y="420">1.00x</text><text x="328" y="240">1.90x</text><text x="541" y="170">2.73x</text><text x="755" y="92">3.50x</text>
+  </g>
+  <text x="400" y="465" text-anchor="middle" font-family="Arial" font-size="12">Serial/parallel maximum temperature difference = 0.00e-13 C</text>
+</svg>

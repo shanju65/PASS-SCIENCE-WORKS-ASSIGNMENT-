@@ -156,7 +156,7 @@ inline BackpropResult run_backprop(BackpropConfig cfg) {
 inline std::string backprop_history_csv(const BackpropResult& r) {
     std::ostringstream os;
     os.precision(12);
-    os << "# Handwritten-backprop training history. Single sample regression.\n";
+    os << "# Backpropagation training history. Single sample regression.\n";
     os << "step,loss_J,y_hat,w,b,v,c\n";
     for (const auto& p : r.history) {
         os << p.step << ',' << p.J << ',' << p.y_hat << ',' << p.theta.w << ',' << p.theta.b << ','

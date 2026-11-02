@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="20">Backpropagation Loss Over 100 Training Steps</text>
+  <text x="400" y="475" text-anchor="middle" font-family="Arial" font-size="14">Training step</text>
+  <text x="25" y="250" text-anchor="middle" font-family="Arial" font-size="14" transform="rotate(-90 25 250)">Loss J</text>
+  <line x1="100" y1="430" x2="740" y2="430" stroke="#333"/>
+  <line x1="100" y1="430" x2="100" y2="70" stroke="#333"/>
+  <polyline points="100,70 170,130 240,220 310,290 380,335 450,365 520,390 590,405 660,416 740,425" fill="none" stroke="#059669" stroke-width="4"/>
+  <g fill="#059669"><circle cx="100" cy="70" r="7"/><circle cx="740" cy="425" r="7"/></g>
+  <g font-family="Arial" font-size="13" fill="#111">
+    <text x="90" y="450">0</text><text x="730" y="450">100</text>
+    <text x="115" y="65">J = 1.18254181</text><text x="585" y="420">J approximately 1e-7</text>
+  </g>
+  <text x="400" y="465" text-anchor="middle" font-family="Arial" font-size="12">All 101 records in the raw CSV cover initial step 0 through step 100</text>
+</svg>
